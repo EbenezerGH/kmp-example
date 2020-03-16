@@ -1,0 +1,4 @@
+#!/bin/bash
+export 'JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_241.jdk/Contents/Home/jre'
+cd '/Users/e0a029j/Documents/development/kotlin_multiplatform/kmp-example'
+./gradlew $@
