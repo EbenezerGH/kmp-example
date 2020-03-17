@@ -1,3 +1,5 @@
+enableFeaturePreview("GRADLE_METADATA") // IMPORTANT!
+
 include ':app'
 include ':SharedCode'
 rootProject.name='kmp-example'

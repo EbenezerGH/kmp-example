@@ -1,7 +1,8 @@
+package com.example
 
 expect fun platformName(): String
 
-fun createApplicationScreenMessage() : String {
+fun createApplicationScreenMessage(): String {
     return "Kotlin Rocks on ${platformName()}"
 }
 

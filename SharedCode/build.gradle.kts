@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     kotlin("multiplatform")
+    id("kotlinx-serialization")
 }
 
 kotlin {
@@ -24,10 +25,24 @@ kotlin {
 
     sourceSets["commonMain"].dependencies {
         implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
+        implementation("io.ktor:ktor-client:1.0.0")
+        implementation("io.ktor:ktor-client-core:1.0.0")
+        implementation("io.ktor:ktor-client-json:1.0.0")
+        implementation("io.ktor:ktor-client-okhttp:1.0.0")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:1.0.1")
+        implementation("io.ktor:ktor-client-json:1.0.0")
+        implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.9.0")
     }
 
     sourceSets["androidMain"].dependencies {
         implementation("org.jetbrains.kotlin:kotlin-stdlib")
+        implementation("io.ktor:ktor-client:1.0.0")
+        implementation("io.ktor:ktor-client-core:1.0.0")
+        implementation("io.ktor:ktor-client-json-jvm:1.0.0")
+        implementation("io.ktor:ktor-client-json:1.0.0")
+        implementation("io.ktor:ktor-client-okhttp:1.0.0")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:1.0.1")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.0")
     }
 }
 
@@ -50,10 +65,12 @@ val packForXcode by tasks.creating(Sync::class) {
     /// generate a helpful ./gradlew wrapper with embedded Java path
     doLast {
         val gradlew = File(targetDir, "gradlew")
-        gradlew.writeText("#!/bin/bash\n"
-                + "export 'JAVA_HOME=${System.getProperty("java.home")}'\n"
-                + "cd '${rootProject.rootDir}'\n"
-                + "./gradlew \$@\n")
+        gradlew.writeText(
+            "#!/bin/bash\n"
+                    + "export 'JAVA_HOME=${System.getProperty("java.home")}'\n"
+                    + "cd '${rootProject.rootDir}'\n"
+                    + "./gradlew \$@\n"
+        )
         gradlew.setExecutable(true)
     }
 }
